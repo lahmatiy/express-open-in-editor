@@ -1,9 +1,11 @@
-Express extension to open file in editor.
+[![NPM version](https://img.shields.io/npm/v/express-open-in-editor.svg)](https://www.npmjs.com/package/express-open-in-editor)
+
+Express extension to open file in editor. Based on [open-in-editor](https://github.com/lahmatiy/open-in-editor).
 
 ## Install
 
 ```
-npm install open-in-editor
+npm install express-open-in-editor
 ```
 
 ## Usage
