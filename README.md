@@ -1,6 +1,6 @@
 [![NPM version](https://img.shields.io/npm/v/express-open-in-editor.svg)](https://www.npmjs.com/package/express-open-in-editor)
 
-Express extension to open file in editor. Based on [open-in-editor](https://github.com/lahmatiy/open-in-editor).
+Express extension to open any file in an editor. Based on [open-in-editor](https://github.com/lahmatiy/open-in-editor).
 
 ## Install
 
@@ -21,17 +21,17 @@ app.use(openInEditor());
 // ...
 ```
 
-After that you can use GET requests like `/open-in-editor?file=foo/bar.ext:2:5` to open `foo/bar.ext` in editor at line 2 column 5.
+After that you can use GET requests like `/open-in-editor?file=foo/bar.ext:2:5` to open `foo/bar.ext` in an editor at line 2 column 5.
 
-By default extension uses `process.env.VISUAL` or `process.env.EDITOR` (with this priority) to get command to open file in editor. It could be set globally or with main script:
+By default extension uses `process.env.VISUAL` or `process.env.EDITOR` (with this priority) to get the command to open file in an editor. It could be set globally or with main script:
 
 ```
 EDITOR=subl node app.js
 ```
 
-Also you can set `process.env.OPEN_FILE`, that has highest priority and could detect editor command to launch by it's short name (i.e. `subl` for `Sublime Text` or `atom` for `Atom Editor`).
+Also you can set `process.env.OPEN_FILE` that has highest priority and understands shorthands (i.e. `subl` for `Sublime Text` or `atom` for `Atom Editor`).
 
-More details about editor setup see in [open-in-editor](https://github.com/lahmatiy/open-in-editor).
+For more details about editor setup see [open-in-editor](https://github.com/lahmatiy/open-in-editor).
 
 ## API
 
@@ -47,7 +47,7 @@ Type: `String`
 
 Default: `/open-in-editor`
 
-Listen path.
+Request to this path triggers middleware.
 
 #### editor
 
@@ -57,7 +57,7 @@ Values: `sublime`, `atom`, `code`
 
 Default: *not set*
 
-Allows set editor to open file. Option accepts one of preset value. When some value is set, extension try to detect command to launch editor if possible.
+Editor to open files. Option accepts one of preset values. When value is set, extension tries to detect command to launch an editor.
 
 Supported editors:
 
@@ -71,9 +71,9 @@ Type: `String`
 
 Default: *not set*
 
-Specify command to launch editor. If some value set to option then `editor` is ignoring.
+Command to launch an editor. This option overrides whatever is set in `editor` option.
 
-Command could contains some patterns to be replaced by actual values. Supported values: `filename`, `line` and `column`.
+Command could contain placeholders that will be replaced with actual values. Supported placeholders: `filename`, `line` and `column`.
 
 ```js
 app.use(openInEditor({
@@ -81,7 +81,7 @@ app.use(openInEditor({
 }));
 ```
 
-If no `{filename}` pattern in command found then `{filename}:{line}:{column}` is appending. So, previous example could be simplified:
+If no `{filename}` placeholder is present, then `{filename}:{line}:{column}` is appended to the value of this option. That way previous example could be simplified:
 
 ```js
 app.use(openInEditor({
