@@ -33,6 +33,19 @@ Also you can set `process.env.OPEN_FILE` that has highest priority and understan
 
 For more details about editor setup see [open-in-editor](https://github.com/lahmatiy/open-in-editor).
 
+### Using with webpack-dev-server
+
+Although `webpack-dev-server` uses `express` to create server, you can't use `app.use()` to apply extension. Instead you should define it in `setup` method (see [issue](https://github.com/webpack/webpack-dev-server/issues/285) for details).
+
+```js
+var server = new WebpackDevServer(webpack(config), {
+  // ...
+  setup: function(app) {
+    app.use(openInEditor());
+  }
+});
+```
+
 ## API
 
 ```
