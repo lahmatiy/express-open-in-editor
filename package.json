@@ -12,9 +12,8 @@
     "file",
     "editor"
   ],
-  "homepage": "https://github.com/lahmatiy/express-open-in-editor#readme",
   "dependencies": {
-    "open-in-editor": "lahmatiy/open-in-editor",
+    "open-in-editor": "^1.1.0",
     "parseurl": "~1.3.0"
   },
   "scripts": {}
