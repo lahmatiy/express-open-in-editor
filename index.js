@@ -8,19 +8,13 @@ module.exports = function(options) {
 
   var url = options.url || '/open-in-editor';
   var opener = configure(options, function(err) {
-    console.warn('open-in-editor configure error: ', err);
+    console.warn('[open-in-editor] configure error: ', err);
   });
-
-  if (!opener) {
-    return function openInEditorFallback(req, res, next) {
-      next();
-    };
-  }
 
   return function openInEditor(req, res, next) {
     function fail(code, message) {
       res.statusCode = code;
-      res.end(message);
+      res.end('[open-in-editor] ' + message);
     }
 
     var parsedUrl = parseUrl(req);
@@ -36,6 +30,12 @@ module.exports = function(options) {
       res.setHeader('Content-Length', '0');
       res.end();
       return;
+    }
+
+    if (!opener) {
+      var msg = 'Request to open file failed, editor is not set up';
+      console.warn('[open-in-editor] ', msg);
+      return fail(400, msg);
     }
 
     var filename = querystring.parse(parsedUrl.query).file;
@@ -56,7 +56,7 @@ module.exports = function(options) {
         res.end('OK');
       },
       function(e) {
-        fail(500, 'open-in-editor error: ' + e);
+        fail(500, 'ERROR: ' + e);
       }
     );
   };
