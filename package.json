@@ -13,7 +13,7 @@
     "editor"
   ],
   "dependencies": {
-    "open-in-editor": "^1.1.0",
+    "open-in-editor": "^1.2.0",
     "parseurl": "~1.3.0"
   },
   "scripts": {}
