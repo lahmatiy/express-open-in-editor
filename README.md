@@ -103,6 +103,12 @@ app.use(openInEditor({
 }));
 ```
 
+## Related projects
+
+- [open-in-editor](https://github.com/lahmatiy/open-in-editor) – package that makes the main task of `express-open-in-editor`, i.e. opens file in editor
+- [babel-plugin-source-wrapper](https://github.com/restrry/babel-plugin-source-wrapper) – Babel plugin that instruments source code to associate objects with location they defined in code base
+- [Component inspector](https://github.com/lahmatiy/component-inspector) – developer tool to inspect components that can open component creation source location in editor. Has integrations for React, Backbone and can be adopter for other frameworks
+
 ## License
 
 MIT
