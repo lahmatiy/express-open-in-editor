@@ -1,3 +1,7 @@
+## 1.2.0 (January 25, 2016)
+
+- Bump `open-in-editor` to `1.2.0`
+
 ## 1.1.0 (November 8, 2015)
 
 - Show warning for any failed request
