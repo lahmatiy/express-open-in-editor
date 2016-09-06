@@ -1,4 +1,4 @@
-## 1.2.1 (January 25, 2016)
+## 1.2.1 (September 6, 2016)
 
 - Fixed leading slash cut in absolute file path
 
