@@ -48,7 +48,7 @@ module.exports = function(options) {
     // should take in account options.base
     filename = path
       .resolve('/', filename)
-      .replace(/^([a-z]+:)?\//i, '');
+      .replace(/^[a-z]+:/i, ''); // cut drive from path on Windows platform
 
     opener.open(filename).then(
       function() {
