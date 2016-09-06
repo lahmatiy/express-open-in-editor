@@ -1,6 +1,6 @@
 {
   "name": "express-open-in-editor",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "Express extension to open file in editor",
   "author": "Roman Dvornov <rdvornov@gmail.com>",
   "license": "MIT",
