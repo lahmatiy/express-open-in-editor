@@ -1,3 +1,7 @@
+## 2.0.0 (March 22, 2017)
+
+- Bump `open-in-editor` to [2.0.0](https://github.com/lahmatiy/open-in-editor/releases/tag/v2.0.0)
+
 ## 1.2.1 (September 6, 2016)
 
 - Fixed leading slash cut in absolute file path
