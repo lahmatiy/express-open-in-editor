@@ -1,3 +1,7 @@
+## 3.0.1 (September 21, 2017)
+
+- Fixed exception on configure error output
+
 ## 3.0.0 (September 21, 2017)
 
 - Reworked to follow `express` best practices (#1)
