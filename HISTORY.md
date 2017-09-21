@@ -1,6 +1,11 @@
+## 3.0.2 (September 21, 2017)
+
+- Fixed crash on send error in response
+- Fixed messages
+
 ## 3.0.1 (September 21, 2017)
 
-- Fixed exception on configure error output
+- Fixed crash on configure error output
 
 ## 3.0.0 (September 21, 2017)
 
