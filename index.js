@@ -4,7 +4,7 @@ var path = require('path');
 var configure = require('open-in-editor').configure;
 var MESSAGE_PREFIX = '[' + require('./package.json').name + '] ';
 
-function fail(code, message) {
+function fail(res, code, message) {
   res.statusCode = code;
   res.end(MESSAGE_PREFIX + message);
 }
