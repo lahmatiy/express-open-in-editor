@@ -1,12 +1,13 @@
 {
   "name": "express-open-in-editor",
-  "version": "2.0.0",
-  "description": "Express extension to open file in editor",
+  "version": "3.0.0",
+  "description": "Express middleware to open file in editor",
   "author": "Roman Dvornov <rdvornov@gmail.com>",
   "license": "MIT",
   "repository": "lahmatiy/express-open-in-editor",
   "keywords": [
     "express",
+    "middleware",
     "extension",
     "open",
     "file",

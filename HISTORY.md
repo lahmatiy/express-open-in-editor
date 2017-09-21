@@ -1,3 +1,7 @@
+## 3.0.0 (September 21, 2017)
+
+- Reworked to follow `express` best practices (#1)
+
 ## 2.0.0 (March 22, 2017)
 
 - Bump `open-in-editor` to [2.0.0](https://github.com/lahmatiy/open-in-editor/releases/tag/v2.0.0)
