@@ -17,5 +17,13 @@
     "open-in-editor": "^2.0.0",
     "parseurl": "~1.3.0"
   },
-  "scripts": {}
+  "scripts": {
+    "test": "mocha --reporter dot",
+    "lint": "jscs index.js test"
+  },
+  "devDependencies": {
+    "express": "^4.15.4",
+    "jscs": "^3.0.7",
+    "mocha": "^3.5.3"
+  }
 }
