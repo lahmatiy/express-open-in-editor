@@ -2,46 +2,30 @@ var parseUrl = require('parseurl');
 var querystring = require('querystring');
 var path = require('path');
 var configure = require('open-in-editor').configure;
+var MESSAGE_PREFIX = '[' + require('./package.json').name + '] ';
+
+function fail(code, message) {
+  res.statusCode = code;
+  res.end(MESSAGE_PREFIX + message);
+}
 
 module.exports = function(options) {
-  options = options || {};
-
-  var url = options.url || '/open-in-editor';
-  var opener = configure(options, function(err) {
-    console.warn('[open-in-editor] configure error: ', err);
+  var opener = configure(options || {}, function(err) {
+    console.warn(NAME + ' configure error: ', err);
   });
 
   return function openInEditor(req, res, next) {
-    function fail(code, message) {
-      res.statusCode = code;
-      res.end('[open-in-editor] ' + message);
+    if (!opener) {
+      var msg = MESSAGE_PREFIX + 'Request to open file failed, editor is not set up';
+      console.warn(msg);
+      return fail(res, 400, msg);
     }
 
     var parsedUrl = parseUrl(req);
-
-    if (parsedUrl.pathname !== url) {
-      next();
-      return;
-    }
-
-    if (req.method !== 'GET' && req.method !== 'HEAD') {
-      res.statusCode = req.method === 'OPTIONS' ? 200 : 405;
-      res.setHeader('Allow', 'GET, HEAD, OPTIONS');
-      res.setHeader('Content-Length', '0');
-      res.end();
-      return;
-    }
-
-    if (!opener) {
-      var msg = 'Request to open file failed, editor is not set up';
-      console.warn('[open-in-editor] ', msg);
-      return fail(400, msg);
-    }
-
     var filename = querystring.parse(parsedUrl.query).file;
 
     if (!filename) {
-      return fail(400, 'Parameter missed: file');
+      return fail(res, 400, 'Parameter missed: file');
     }
 
     // temporary solution
@@ -56,7 +40,7 @@ module.exports = function(options) {
         res.end('OK');
       },
       function(e) {
-        fail(500, 'ERROR: ' + e);
+        fail(res, 500, 'ERROR: ' + e);
       }
     );
   };
