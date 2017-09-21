@@ -11,7 +11,7 @@ function fail(code, message) {
 
 module.exports = function(options) {
   var opener = configure(options || {}, function(err) {
-    console.warn(NAME + ' configure error: ', err);
+    console.warn(MESSAGE_PREFIX + ' configure error: ', err);
   });
 
   return function openInEditor(req, res, next) {
