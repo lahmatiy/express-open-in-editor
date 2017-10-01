@@ -1,5 +1,4 @@
-var parseUrl = require('parseurl');
-var querystring = require('querystring');
+var url = require('url');
 var path = require('path');
 var configure = require('open-in-editor').configure;
 var MESSAGE_PREFIX = '[' + require('./package.json').name + '] ';
@@ -14,15 +13,14 @@ module.exports = function(options) {
         console.warn(MESSAGE_PREFIX + 'Configure error:', err);
     });
 
-    return function openInEditor(req, res, next) {
+    return function openInEditor(req, res) {
         if (!opener) {
             var msg = 'Request to open file failed, editor is not set up';
             console.warn(MESSAGE_PREFIX + msg);
             return fail(res, 400, msg);
         }
 
-        var parsedUrl = parseUrl(req);
-        var filename = querystring.parse(parsedUrl.query).file;
+        var filename = url.parse(req.url, true).query.file;
 
         if (!filename) {
             return fail(res, 400, 'Parameter missed: file');
