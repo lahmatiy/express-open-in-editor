@@ -13,6 +13,12 @@
     "file",
     "editor"
   ],
+  "files": [
+    "HISTORY.md",
+    "index.js",
+    "LICENSE",
+    "README.md"
+  ],
   "dependencies": {
     "open-in-editor": "^2.0.0",
     "parseurl": "~1.3.0"
