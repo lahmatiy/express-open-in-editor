@@ -1,3 +1,8 @@
+## 3.1.0 (October 1, 2017)
+
+- Added `cwd` option
+- Removed `parseurl` from dependencies
+
 ## 3.0.2 (September 21, 2017)
 
 - Fixed crash on send error in response
