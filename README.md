@@ -27,7 +27,7 @@ app.get('/open-in-editor', openInEditor());
 app.use('/open-in-editor', openInEditor());
 
 // - to trigger middleware on *any* request method to *any* path
-//   (not recomended unless server's single purpose is to open files in editor)
+//   (not recommended unless server's single purpose is to open files in editor)
 app.use(openInEditor());
 ```
 
