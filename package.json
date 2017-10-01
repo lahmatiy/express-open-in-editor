@@ -25,10 +25,13 @@
   "scripts": {
     "test": "mocha --reporter dot",
     "lint": "jscs index.js test",
-    "travis": "npm run lint && npm run test"
+    "travis": "npm run lint && npm run test && npm run coveralls",
+    "coveralls": "istanbul cover _mocha --report lcovonly -- -R min && cat ./coverage/lcov.info | coveralls"
   },
   "devDependencies": {
+    "coveralls": "^2.11.6",
     "express": "^4.15.4",
+    "istanbul": "^0.4.2",
     "jscs": "^3.0.7",
     "mocha": "^3.5.3"
   }
