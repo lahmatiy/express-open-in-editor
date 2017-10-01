@@ -1,6 +1,7 @@
 var assert = require('assert');
 var express = require('express');
 var http = require('http');
+var path = require('path');
 var openInEditor = require('../index.js');
 var PORT = process.env.PORT || 8999;
 var OPEN_FILE = 'echo';
@@ -38,8 +39,8 @@ describe('app.use(middleware)', function() {
     var server;
     var app;
     var tests = [
-        [{ path: '/any?file=foo' }, 200, 'OK'],
-        [{ path: '/any?file=foo', method: 'POST' }, 200, 'OK'],
+        [{ path: '/any?file=foo' }, 200, 'Open in editor: ' + path.join(process.cwd(), 'foo')],
+        [{ path: '/any?file=foo', method: 'POST' }, 200, 'Open in editor: ' + path.join(process.cwd(), 'foo')],
         [{ path: '/any?filex=foo' }, 400, '[express-open-in-editor] Parameter missed: file']
     ];
 
@@ -70,8 +71,8 @@ describe('app.use("path", middleware)', function() {
     var server;
     var app;
     var tests = [
-        [{ path: '/test?file=foo' }, 200, 'OK'],
-        [{ path: '/test?file=foo', method: 'POST' }, 200, 'OK'],
+        [{ path: '/test?file=foo' }, 200, 'Open in editor: ' + path.join(process.cwd(), 'foo')],
+        [{ path: '/test?file=foo', method: 'POST' }, 200, 'Open in editor: ' + path.join(process.cwd(), 'foo')],
         [{ path: '/test?filex=foo' }, 400, '[express-open-in-editor] Parameter missed: file'],
         [{ path: '/?file=foo' }, 404, /Cannot GET \//],
         [{ path: '/xx?file=foo' }, 404, /Cannot GET \/xx/]
@@ -104,7 +105,7 @@ describe('app.get("path", middleware)', function() {
     var server;
     var app;
     var tests = [
-        [{ path: '/test?file=foo' }, 200, 'OK'],
+        [{ path: '/test?file=foo' }, 200, 'Open in editor: ' + path.join(process.cwd(), 'foo')],
         [{ path: '/test?file=foo', method: 'POST' }, 404, /Cannot POST \/test/],
         [{ path: '/test?filex=foo' }, 400, '[express-open-in-editor] Parameter missed: file'],
         [{ path: '/?file=foo' }, 404, /Cannot GET \//],
@@ -114,6 +115,40 @@ describe('app.get("path", middleware)', function() {
     beforeEach(function(done) {
         app = express();
         app.get('/test', openInEditor());
+        server = app.listen(PORT, function() {
+            done();
+        });
+    });
+    afterEach(function() {
+        server.close();
+    });
+
+    tests.forEach(function(test) {
+        var options = test[0];
+        var statusCode = test[1];
+        var response = test[2];
+
+        it([
+            options.method || 'GET',
+            options.path
+        ].join(' '), request(options, statusCode, response));
+    });
+});
+
+describe('options', function() {
+    var server;
+    var app;
+    var tests = [
+        [{ path: '/defaultCwd?file=script.js:2:12' }, 200, 'Open in editor: ' + path.join(process.cwd(), 'script.js:2:12')],
+        [{ path: '/cwd?file=script.js:2:12' }, 200, 'Open in editor: ' + path.join(process.cwd(), 'some/path/script.js:2:12')]
+    ];
+
+    beforeEach(function(done) {
+        app = express();
+        app.get('/defaultCwd', openInEditor());
+        app.get('/cwd', openInEditor({
+            cwd: 'some/path'
+        }));
         server = app.listen(PORT, function() {
             done();
         });
@@ -180,5 +215,5 @@ describe('bad command', function() {
         server.close();
     });
 
-    it('request to server with bad command should fail', request({ path: '/test?file=foo' }, 500, /ERROR: Error: Command failed: "xxx" "\/foo:1:1"/));
+    it('request to server with bad command should fail', request({ path: '/test?file=foo' }, 500, new RegExp('\\[express-open-in-editor\\] ERROR: Error: Command failed: "xxx" "' + path.join(process.cwd(), 'foo:1:1') + '"')));
 });

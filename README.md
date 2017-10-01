@@ -62,7 +62,16 @@ var server = new WebpackDevServer(webpack(config), {
 openInEditor([options]);
 ```
 
-Options are optional and passes to [open-in-editor](https://github.com/lahmatiy/open-in-editor) as is.
+Options:
+
+- `cwd`
+
+  Type: `String`  
+  Default: `''` (uses `process.cwd()`)
+
+  Working directory used when resolving paths.
+
+- Rest options are passing to [open-in-editor](https://github.com/lahmatiy/open-in-editor) as is.
 
 ## Related projects
 

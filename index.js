@@ -9,6 +9,7 @@ function fail(res, code, message) {
 }
 
 module.exports = function(options) {
+    var cwd = path.resolve((options && options.cwd) || process.cwd());
     var opener = configure(options || {}, function(err) {
         console.warn(MESSAGE_PREFIX + 'Configure error:', err);
     });
@@ -29,13 +30,13 @@ module.exports = function(options) {
         // temporary solution
         // should take in account options.base
         filename = path
-            .resolve('/', filename)
+            .join(cwd, path.resolve('/', filename))
             .replace(/^[a-z]+:/i, ''); // cut drive from path on Windows platform
 
         opener.open(filename).then(
             function() {
                 res.statusCode = 200;
-                res.end('OK');
+                res.end('Open in editor: ' + filename);
             },
             function(e) {
                 fail(res, 500, 'ERROR: ' + e);
