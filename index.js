@@ -29,9 +29,12 @@ module.exports = function(options) {
 
         // temporary solution
         // should take in account options.base
-        filename = path
-            .join(cwd, path.resolve('/', filename))
-            .replace(/^[a-z]+:/i, ''); // cut drive from path on Windows platform
+        filename = path.join(
+            cwd,
+            path
+                .resolve('/', filename)
+                .replace(/^[a-z]+:/i, '') // cut drive from path on Windows platform
+        );
 
         opener.open(filename).then(
             function() {
