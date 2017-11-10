@@ -1,3 +1,7 @@
+## 3.1.1 (November 10, 2017)
+
+- Fixed absolute filepath on Windows
+
 ## 3.1.0 (October 1, 2017)
 
 - Added `cwd` option
