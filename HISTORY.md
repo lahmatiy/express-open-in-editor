@@ -1,6 +1,6 @@
 ## 3.1.1 (November 10, 2017)
 
-- Fixed absolute filepath on Windows
+- Fixed absolute file path resolving on Windows (@bashmish, #7)
 
 ## 3.1.0 (October 1, 2017)
 
