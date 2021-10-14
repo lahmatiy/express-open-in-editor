@@ -8,7 +8,7 @@ var OPEN_FILE = 'echo';
 
 process.env.OPEN_FILE = OPEN_FILE;
 
-function request(options, expectedStatusCode, expectedResponse, done) {
+function request(options, expectedStatusCode, expectedResponse) {
     return function(done) {
         http.request(Object.assign({
             hostname: 'localhost',

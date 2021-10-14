@@ -1,7 +1,6 @@
 [![NPM version](https://img.shields.io/npm/v/express-open-in-editor.svg)](https://www.npmjs.com/package/express-open-in-editor)
 [![Build Status](https://travis-ci.org/lahmatiy/express-open-in-editor.svg?branch=master)](https://travis-ci.org/lahmatiy/express-open-in-editor)
 [![Coverage Status](https://coveralls.io/repos/github/lahmatiy/express-open-in-editor/badge.svg?branch=master)](https://coveralls.io/github/lahmatiy/express-open-in-editor?branch=master)
-[![Dependency Status](https://img.shields.io/david/lahmatiy/express-open-in-editor.svg)](https://david-dm.org/lahmatiy/express-open-in-editor)
 
 Express middleware to open any file in an editor by request to defined route. Based on [open-in-editor](https://github.com/lahmatiy/open-in-editor).
 
