@@ -44,15 +44,17 @@ For more details about setup see [open-in-editor](https://github.com/lahmatiy/op
 
 ### Using with webpack-dev-server
 
-Although `webpack-dev-server` uses `express` to create a server, you have the same options to apply the middleware to it. The only difference is that you should define it in `setup` method (see [issue](https://github.com/webpack/webpack-dev-server/issues/285) for details).
+Although `webpack-dev-server` uses `express` to create a dev server, you have the same options to apply the middleware to it. The only difference is that you should define it inside [`onBeforeSetupMiddleware`](https://webpack.js.org/configuration/dev-server/#devserveronbeforesetupmiddleware) method:
 
 ```js
-var server = new WebpackDevServer(webpack(config), {
+const webpackConfig = {
   // ...
-  setup: function(app) {
-    app.use('/open-in-editor', openInEditor());
+  devServer: {
+    onBeforeSetupMiddleware(devServer) {
+      devServer.app.use('/open-in-editor', openInEditor());
+    }
   }
-});
+}
 ```
 
 ## API
